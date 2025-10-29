@@ -1,4 +1,4 @@
-// import { CreateWorkflowDto, UpdateWorkflowDto } from '@app/workflows';
+import { CreateWorkflowDto, UpdateWorkflowDto } from '@app/workflows';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -23,7 +23,7 @@ export class WorkflowsService {
     return workflow;
   }
 
-  async create(createWorkflowDto: any): Promise<Workflow[]> {
+  async create(createWorkflowDto: CreateWorkflowDto): Promise<Workflow> {
     const workflow = this.workflowsRepository.create({
       ...createWorkflowDto,
     });
@@ -31,7 +31,10 @@ export class WorkflowsService {
     return newWorkflowEntity;
   }
 
-  async update(id: number, updateWorkflowDto: any): Promise<Workflow> {
+  async update(
+    id: number,
+    updateWorkflowDto: UpdateWorkflowDto,
+  ): Promise<Workflow> {
     const workflow = await this.workflowsRepository.preload({
       id: +id,
       ...updateWorkflowDto,
