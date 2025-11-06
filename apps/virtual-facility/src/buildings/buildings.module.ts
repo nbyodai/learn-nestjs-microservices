@@ -9,7 +9,7 @@ import { WORKFLOWS_SERVICE } from '../constants';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Building]),
-    //
+    //it is this that enables us to then use Inject to get a client proxy instance in the service
     ClientsModule.register([
       {
         name: WORKFLOWS_SERVICE,
